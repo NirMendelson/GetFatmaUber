@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class Motorcycle extends Vehicle {
+public class Motorcycle extends Vehicle implements Deliverable {
 	
 	private int maxSpeed;
 	private double engineDisplacement;
@@ -23,6 +23,11 @@ public class Motorcycle extends Vehicle {
 	    Random random = new Random();
 	    double P = 0.6 + (0.2 * random.nextDouble());
 		return (distance / (this.maxSpeed * P));
+	}
+
+
+	public boolean canDeliver() {
+		return true;
 	}
 	
 }

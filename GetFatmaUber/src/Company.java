@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Company {
 	
@@ -31,21 +32,26 @@ public class Company {
 	}
 
 	public boolean serviceForCustomer(int customerID, String serviceType, String serviceArea, double distance) {
+
 		// finding the customer
-		int customerIndex = 0;
+		int customerIndex = -1;
 		for (int i = 0; i < customersList.size(); i++) {
 			if (customersList.get(i).getID() == customerID) {
 				customerIndex = i;
 			}
 		}
+		if (customerID == -1) {
+			System.out.println("Request is rejected because customerID is invalid");
+			return false;
+		}
 		
 		// finding the vehicle
-		int vehicleIndex = 0;
+		int vehicleIndex = -1;
 		if (serviceType.equals("Delivery")) {
 			for (int i = 0; i < vehiclesList.size(); i++) {
-				if (vehiclesList.get(i).getType().equals("Motorcycle") || vehiclesList.get(i).getType().equals("Taxi")) {
+				if (vehiclesList.get(i).getType().equals("Motorcycle") &&  vehiclesList.get(i).getIsAvailable() == false|| vehiclesList.get(i).getType().equals("Taxi") && vehiclesList.get(i).getIsAvailable() == false) {
 					vehicleIndex = i;
-					vehiclesList.get(i).setOccupied(true);
+					vehiclesList.get(i).setIsAvailable(false);
 					break;
 				}
 			}
@@ -54,19 +60,26 @@ public class Company {
 			for (int i = 0; i < vehiclesList.size(); i++) {
 				if (vehiclesList.get(i).getType().equals("Taxi")) {
 					vehicleIndex = i;
-					vehiclesList.get(i).setOccupied(true);
+					vehiclesList.get(i).setIsAvailable(false);
+					break;
+				}
+			}
+		}
+		else if (serviceType.equals("Premium Taxi")) {
+			for (int i = 0; i < vehiclesList.size(); i++) {
+				if (vehiclesList.get(i).getType().equals("Premium Taxi")) {
+					vehicleIndex = i;
+					vehiclesList.get(i).setIsAvailable(false);
 					break;
 				}
 			}
 		}
 		else {
-			for (int i = 0; i < vehiclesList.size(); i++) {
-				if (vehiclesList.get(i).getType().equals("Premium Taxi")) {
-					vehicleIndex = i;
-					vehiclesList.get(i).setOccupied(true);
-					break;
-				}
-			}
+			System.out.println("Request is rejected because service type is invalid");
+			return false;
+		}
+		if (vehicleIndex == -1) {
+			System.out.println("Request is rejected because there are no available vehicles");
 		}
 		
 		// finding the employee
@@ -78,31 +91,63 @@ public class Company {
 				employeeIndex = i;
 			}
 		}
+		
+		System.out.println("Employee name:" + this.serviceEmployeeList.get(employeeIndex).getName());
+		
+		ServiceCall newServiceCall = new ServiceCall(this.customersList.get(customerIndex), this.vehiclesList.get(vehicleIndex), serviceArea, distance);
+		this.serviceEmployeeList.get(employeeIndex).Service(newServiceCall);
+		return true;
 	}
 	
-	
-	Customer c, Vehicle v, String serviceArea, double distance
-	
-	this.customerList.get(customerIndex), this.vehiclesList.get(vehicleIndex), String serviceArea, double distance
-	
-	public static double totalRevenues {
-		
+	public static double totalRevenues(ArrayList<Driver> driversList) {
+		double totalRevenue = 0;
+		for (int i = 0; i < driversList.size(); i++) {
+			totalRevenue += driversList.get(i).getAllEarnings();
+		}
+		return totalRevenue;
 	}
 	
-	public static double avgCustomerPayment {
-		
+	public static double avgCustomerPayment(ArrayList<Customer> customersList) {
+		double averagePayment = 0;
+		for (int i = 0; i < customersList.size(); i++) {
+			averagePayment += customersList.get(i).getAllExpenses();
+		}
+		return averagePayment;
 	}
 	
-	public static Comparable getMin {
-		
+	public static Comparable getMin(ArrayList<Comparable> list) {
+	    if (list.isEmpty()) {
+	        throw new IllegalArgumentException("List is empty.");
+	    }
+
+	    Comparable min = list.get(0);
+	    for (int i = 1; i < list.size(); i++) {
+	    	Comparable current = list.get(i);
+	        if (current.compareTo(min) < 0) {
+	            min = current;
+	        }
+	    }
+
+	    return min;
 	}
 
-	public static int upgrades {
-		
+
+	public static int upgrades(ArrayList<Upgrades> list) {
+	    int numOfUpdraded = 0;
+	    for (int i = 0; i < list.size(); i++) {
+	    	if (list.get(i).upgrade()) {
+	    		numOfUpdraded++;
+	    	}
+	    }
+	    return numOfUpdraded;
 	}
+
 	
-	public static void DeliveryVehicles {
-		
+	public static void DeliveryVehicles(ArrayList<Deliverable> list) {
+		System.out.println("Deliverable vehicles:");
+		for (int i = 0; i < list.size(); i++) {
+			System.out.println("Type:" + list.get(i).getType() + ", License: " + list.get(i).getLicenseNumber() + ", Model: " + list.get(i).getModel() + ", Year: " + list.get(i).getYear());
+		}
 	}
 	
 }

@@ -33,6 +33,10 @@ public class Driver implements Comparable <Driver> {
 		return this.rating;
 	}
 	
+	public double getAllEarnings() {
+		return this.allEarnings;
+	}
+	
 	public int compareTo(Driver dOther) {
 		if (this.getRating() > dOther.getRating()) {
 			return 1;

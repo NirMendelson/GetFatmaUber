@@ -30,10 +30,9 @@ public class ServiceEmployee {
 	}
 	
 	public void Service(ServiceCall sc) {
-//		this.callsMade++;
-//		if (sc.getVehicle().canDeliver()) {
-//			
-//		}
+		if (sc.getServiceArea().equals(this.serviceArea)) {
+			
+		}
 	}
 	
 	public double getBonus() {
@@ -42,6 +41,10 @@ public class ServiceEmployee {
 	
 	public void setBonus(double bonus) {
 		this.bonus = bonus;
+	}
+	
+	public String getName() {
+		return this.name;
 	}
 	
 	public void setCallsMadeInLatestUpgrade(int calls) {

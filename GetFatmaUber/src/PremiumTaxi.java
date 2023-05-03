@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class PremiumTaxi extends Taxi {
+public class PremiumTaxi extends Taxi implements Upgrades {
 
 	private double luxuryCharge;
 	

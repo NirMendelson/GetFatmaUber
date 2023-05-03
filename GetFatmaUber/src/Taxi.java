@@ -1,7 +1,6 @@
 import java.util.Random;
 
-public class Taxi extends Vehicle {
-
+public class Taxi extends Vehicle implements Deliverable {
 	
 	private double baseFare;
 	protected int maxPassengers;
@@ -23,6 +22,11 @@ public class Taxi extends Vehicle {
 	    double P = 0.5 + (0.2 * random.nextDouble());
 		return (distance / (100 * P)) + 2;
 	    
+	}
+
+	@Override
+	public boolean canDeliver() {
+		return true;
 	}
 	
 }

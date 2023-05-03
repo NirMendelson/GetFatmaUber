@@ -1,7 +1,7 @@
 
-public class Vehicle implements Comparable <Vehicle>, Deliverable {
+public class Vehicle implements Comparable <Vehicle>  {
 	
-	public boolean occupied;
+	public boolean isAvailable;
 	protected String type;
 	private Driver driver;
 	private int licenseNumber;
@@ -36,12 +36,24 @@ public class Vehicle implements Comparable <Vehicle>, Deliverable {
 		return this.year;
 	}
 	
+	public String getModel() {
+		return this.model;
+	}
+	
 	public String getType() {
 		return this.type;
 	}
 	
-	public void setOccupied(boolean occupied) {
-		this.occupied = occupied;
+	public boolean getIsAvailable() {
+		return this.isAvailable;
+	}
+	
+	public void setIsAvailable(boolean isAvailable) {
+		this.isAvailable = isAvailable;
+	}
+	
+	public int getLicenseNumber() {
+		return this.licenseNumber;
 	}
 	
 
@@ -57,14 +69,14 @@ public class Vehicle implements Comparable <Vehicle>, Deliverable {
 		}
 	}
 
-	public boolean canDeliver() {
-		if (this.type.equals("PremiumTaxi")) {
-			return false;
-		}
-		else {
-			return true;
-		}
-	}
+//	public boolean canDeliver() {
+//		if (this.type.equals("PremiumTaxi")) {
+//			return false;
+//		}
+//		else {
+//			return true;
+//		}
+//	}
 
 
 	
