@@ -6,7 +6,9 @@ public class Customer implements Comparable <Customer>  {
 	private String name;
 	private int age;
 	private char gender;
-	private double expenses = 10;
+	private double allExpenses = 10;
+	private double latestExpense = 0; 
+	private int ratingToDriver = 0;
 	
 	public Customer (int ID, String name, int age, char gender) {
 		this.ID = ID;
@@ -17,16 +19,30 @@ public class Customer implements Comparable <Customer>  {
 	
 	public int giveRating() {
 		Random random = new Random();
+		this.ratingToDriver = random.nextInt(5) + 1;
 	    return random.nextInt(5) + 1;
 	}
 	
-	public double pay(double time, double Fare) {
-		this.expenses = this.expenses + (2*time + Fare);
-		return 2*time + Fare;
+	public int getGiveRating() {
+		return this.giveRating();
 	}
 	
-	public double getExpenses() {
-		return this.expenses;
+	public double pay(double time, double Fare) {
+		this.latestExpense = (2*time + Fare);
+		this.allExpenses = this.allExpenses + this.latestExpense;
+		return this.latestExpense;
+	}
+	
+	public double getAllExpenses() {
+		return this.allExpenses;
+	}
+	
+	public int getID() {
+		return this.ID;
+	}
+	
+	public double getLatestExpense() {
+		return this.latestExpense;
 	}
 	
 	public int getAge() {
@@ -34,10 +50,10 @@ public class Customer implements Comparable <Customer>  {
 	}
 
 	public int compareTo(Customer other) {
-		if (this.getExpenses() > other.getExpenses()) {
+		if (this.getAllExpenses() > other.getAllExpenses()) {
 			return 1;
 		}
-		else if (other.getExpenses() > this.getExpenses()) {
+		else if (other.getAllExpenses() > this.getAllExpenses()) {
 			return -1;
 		} 
 		else {

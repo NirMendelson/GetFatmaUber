@@ -1,6 +1,8 @@
 
-public class Vehicle implements Comparable <Vehicle> {
+public class Vehicle implements Comparable <Vehicle>, Deliverable {
 	
+	public boolean occupied;
+	protected String type;
 	private Driver driver;
 	private int licenseNumber;
 	private String model;
@@ -34,6 +36,14 @@ public class Vehicle implements Comparable <Vehicle> {
 		return this.year;
 	}
 	
+	public String getType() {
+		return this.type;
+	}
+	
+	public void setOccupied(boolean occupied) {
+		this.occupied = occupied;
+	}
+	
 
 	public int compareTo(Vehicle vOther) {
 		if (this.getYear() > vOther.getYear()) {
@@ -44,6 +54,15 @@ public class Vehicle implements Comparable <Vehicle> {
 		} 
 		else {
 			return 0;
+		}
+	}
+
+	public boolean canDeliver() {
+		if (this.type.equals("PremiumTaxi")) {
+			return false;
+		}
+		else {
+			return true;
 		}
 	}
 

@@ -1,18 +1,15 @@
 import java.util.Random;
 
-public class Taxi {
+public class Taxi extends Vehicle {
 
-	private int licenseNumber;
-	private String model;
-	private int year;
+	
 	private double baseFare;
-	private int maxPassengers;
+	protected int maxPassengers;
 	
 	public Taxi(int licenseNumber, String model, int year, double baseFare, int maxPassengers) {
-		this.licenseNumber = licenseNumber;
-		this.model = model;
-		this.year = year;
+		super(licenseNumber, model, year);
 		this.baseFare = baseFare;
+		this.type = "Taxi";
 		if (maxPassengers > 4 || maxPassengers < 1) {
 			throw new RuntimeException("max passengers is invalid");
 		}

@@ -1,19 +1,15 @@
 import java.util.Random;
 
-public class Motorcycle {
-
-	private int licenseNumber;
-	private String model;
-	private int year;
+public class Motorcycle extends Vehicle {
+	
 	private int maxSpeed;
 	private double engineDisplacement;
 	
 	public Motorcycle(int licenseNumber, String model, int year, int maxSpeed, double
 			engineDisplacement) {
-		this.licenseNumber = licenseNumber;
-		this.model = model;
-		this.year = year;
+		super(licenseNumber, model, year);
 		this.engineDisplacement = engineDisplacement;
+		this.type = "Motorcycle";
 		if (maxSpeed < 0) {
 			throw new RuntimeException("max speed is invalid");
 		}
