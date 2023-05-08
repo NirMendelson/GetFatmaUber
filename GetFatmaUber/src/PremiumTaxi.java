@@ -4,18 +4,16 @@ public class PremiumTaxi extends Taxi implements Upgrades {
 
 	private double luxuryCharge;
 	
-	public PremiumTaxi(int licenseNumber, String model, int year, double baseFare, int
-			maxPassengers, double luxuryCharge) {
+	public PremiumTaxi(int licenseNumber, String model, int year, double baseFare, int maxPassengers, double luxuryCharge) {
 		super(licenseNumber, model, year, baseFare, maxPassengers);
 		this.type = "PremiumTaxi";
 		this.luxuryCharge = luxuryCharge;
 		if (maxPassengers > 10 || maxPassengers < 1) {
-			throw new RuntimeException("max passengers is invalid");
+			throw new RuntimeException("max passengers is invalid a ");
 		}
 		else {
 			this.maxPassengers = maxPassengers;
 		}
-		
 	}
 	
 	public boolean upgrade() {

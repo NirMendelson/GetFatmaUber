@@ -32,11 +32,42 @@ public class ServiceEmployee {
 	public void Service(ServiceCall sc) {
 		if (sc.getServiceArea().equals(this.serviceArea)) {
 			
+			System.out.println("GetFatimaUber is here for you!");
+			System.out.println("Driver name: " + sc.getVehicle().getDriver().getName());
+			System.out.println("License number: " + sc.getVehicle().getLicenseNumber());
+			System.out.println("Model: " + sc.getVehicle().getModel());
+			System.out.println("Duration: " + sc.getVehicle().calculateDrivingTime());
+			System.out.println("Payment: " + sc.getCustomer().getLatestExpense());
+			System.out.println("Enjoy!");
+			
+			// updating drivers profit
+			sc.getVehicle().getDriver().addToAllEarnings(sc.getVehicle().getDriver().drivingProfit(sc.getCustomer(), sc.getVehicle().calculateDrivingTime(), sc.getVehicle()));
+			
+			// updating the employee's rating
+			this.setRating(sc.getCustomer().getGiveRating());
+			
+			// updating the driver's rating
+			sc.getVehicle().getDriver().setRating(sc.getCustomer().getGiveRating());
+			
+			// updating the employee's bonus
+			this.setBonus(sc.getCustomer().getGiveRating() * 2);
+			
+
+			// updating the driver and vehicle availability 
+			sc.getVehicle().setIsAvailable(true);
+			sc.getVehicle().getDriver().setIsAvailable(true);
+		}
+		else {
+			System.out.println("Wrong service area");
 		}
 	}
 	
 	public double getBonus() {
 		return this.bonus;
+	}
+	
+	public void setRating(double rating) {
+		this.rating = rating;
 	}
 	
 	public void setBonus(double bonus) {

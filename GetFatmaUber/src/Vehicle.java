@@ -12,7 +12,7 @@ public class Vehicle implements Comparable <Vehicle>  {
 	public Vehicle(int licenseNumber, String model, int year) {
 		this.licenseNumber = licenseNumber;
 		this.model = model;
-		if (year < 2022 || year > 1970) {
+		if (year > 2022 || year < 1970) {
 			throw new RuntimeException("year is invalid");
 		}
 		else {
@@ -20,6 +20,10 @@ public class Vehicle implements Comparable <Vehicle>  {
 		}
 
 		
+	}
+	
+	public double calculateDrivingTime() {
+		return 0;
 	}
 	
 	public boolean addDriver(Driver driver) {
@@ -34,6 +38,14 @@ public class Vehicle implements Comparable <Vehicle>  {
 	
 	public int getYear() {
 		return this.year;
+	}
+	
+	public void setDriver(Driver driver) {
+		this.driver = driver;
+	}
+	
+	public Driver getDriver() {
+		return this.driver;
 	}
 	
 	public String getModel() {

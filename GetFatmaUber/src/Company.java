@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 public class Company {
@@ -82,6 +83,25 @@ public class Company {
 			System.out.println("Request is rejected because there are no available vehicles");
 		}
 		
+		// finding the driver
+		if (this.vehiclesList.get(vehicleIndex).getType().equals("Motorcycle")) {
+			for (int i = 0; i < this.driversList.size(); i++) {
+				if (Arrays.asList(this.driversList.get(i).getLicense()).contains("A")) {
+					this.vehiclesList.get(vehicleIndex).setDriver(this.driversList.get(i));
+					this.driversList.get(i).setIsAvailable(false);
+				}
+			}
+		}
+		else {
+			for (int i = 0; i < this.driversList.size(); i++) {
+				if (Arrays.asList(this.driversList.get(i).getLicense()).contains("B")) {
+					this.vehiclesList.get(vehicleIndex).setDriver(this.driversList.get(i));
+					this.driversList.get(i).setIsAvailable(false);
+				}
+			}
+		}
+	
+		
 		// finding the employee
 		double minBonus = this.serviceEmployeeList.get(0).getBonus();
 		int employeeIndex = 0;
@@ -96,6 +116,9 @@ public class Company {
 		
 		ServiceCall newServiceCall = new ServiceCall(this.customersList.get(customerIndex), this.vehiclesList.get(vehicleIndex), serviceArea, distance);
 		this.serviceEmployeeList.get(employeeIndex).Service(newServiceCall);
+		
+		
+		
 		return true;
 	}
 	

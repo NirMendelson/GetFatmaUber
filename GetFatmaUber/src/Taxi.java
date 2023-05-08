@@ -10,7 +10,7 @@ public class Taxi extends Vehicle implements Deliverable {
 		this.baseFare = baseFare;
 		this.type = "Taxi";
 		if (maxPassengers > 4 || maxPassengers < 1) {
-			throw new RuntimeException("max passengers is invalid");
+			throw new RuntimeException("max passengers is invalid b");
 		}
 		else {
 			this.maxPassengers = maxPassengers;
