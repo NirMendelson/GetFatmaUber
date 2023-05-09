@@ -17,7 +17,7 @@ public class Driver implements Comparable <Driver> {
 		this.phoneNumber = phoneNumber;
 		this.rating = rating;
 		this.licenses = licenses;
-		}
+	}
 	
 
 	public double drivingProfit(Customer c, double time, Vehicle v) {

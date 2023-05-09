@@ -33,7 +33,8 @@ public class Company {
 	}
 
 	public boolean serviceForCustomer(int customerID, String serviceType, String serviceArea, double distance) {
-
+		
+		System.out.println("started service for customer");
 		// finding the customer
 		int customerIndex = -1;
 		for (int i = 0; i < customersList.size(); i++) {
@@ -41,11 +42,13 @@ public class Company {
 				customerIndex = i;
 			}
 		}
+		System.out.println("a");
 		if (customerID == -1) {
 			System.out.println("Request is rejected because customerID is invalid");
 			return false;
 		}
-		
+		System.out.println("b");
+
 		// finding the vehicle
 		int vehicleIndex = -1;
 		if (serviceType.equals("Delivery")) {
@@ -57,6 +60,7 @@ public class Company {
 				}
 			}
 		}
+
 		else if (serviceType.equals("Taxi")) {
 			for (int i = 0; i < vehiclesList.size(); i++) {
 				if (vehiclesList.get(i).getType().equals("Taxi")) {
@@ -79,6 +83,8 @@ public class Company {
 			System.out.println("Request is rejected because service type is invalid");
 			return false;
 		}
+		System.out.println("c");
+
 		if (vehicleIndex == -1) {
 			System.out.println("Request is rejected because there are no available vehicles");
 		}
@@ -100,7 +106,8 @@ public class Company {
 				}
 			}
 		}
-	
+		System.out.println("d");
+
 		
 		// finding the employee
 		double minBonus = this.serviceEmployeeList.get(0).getBonus();
@@ -111,6 +118,7 @@ public class Company {
 				employeeIndex = i;
 			}
 		}
+		System.out.println("e");
 		
 		System.out.println("Employee name:" + this.serviceEmployeeList.get(employeeIndex).getName());
 		
@@ -118,7 +126,7 @@ public class Company {
 		this.serviceEmployeeList.get(employeeIndex).Service(newServiceCall);
 		
 		
-		
+		System.out.println("finished service for customer");
 		return true;
 	}
 	

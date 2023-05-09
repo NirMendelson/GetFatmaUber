@@ -9,13 +9,15 @@ public class Taxi extends Vehicle implements Deliverable {
 		super(licenseNumber, model, year);
 		this.baseFare = baseFare;
 		this.type = "Taxi";
-		if (maxPassengers > 4 || maxPassengers < 1) {
-			throw new RuntimeException("max passengers is invalid b");
-		}
-		else {
-			this.maxPassengers = maxPassengers;
-		}
+		setMaxPassengers(maxPassengers);
 	}
+	
+	public void setMaxPassengers(int maxPassengers) {
+        if (maxPassengers > 4 || maxPassengers < 1) {
+            throw new IllegalArgumentException("you can only have 1-4 passengers in a taxi");
+        }
+        this.maxPassengers = maxPassengers;
+    }
 	
 	public double calculateDrivingTime(double distance) {
 	    Random random = new Random();

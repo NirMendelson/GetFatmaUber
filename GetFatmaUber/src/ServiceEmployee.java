@@ -21,7 +21,7 @@ public class ServiceEmployee {
 		this.serviceArea = serviceArea;
 		this.bonus = this.rating*2;
 		
-		if (gender > 4 || gender < 1) {
+		if (gender != 'M' && gender != 'F') {
 			throw new RuntimeException("gender is invalid");
 		}
 		else {
