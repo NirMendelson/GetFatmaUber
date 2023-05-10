@@ -36,18 +36,18 @@ public class Company {
 		
 		System.out.println("started service for customer");
 		// finding the customer
+		System.out.println("customerID: " + customerID);
 		int customerIndex = -1;
 		for (int i = 0; i < customersList.size(); i++) {
 			if (customersList.get(i).getID() == customerID) {
 				customerIndex = i;
 			}
 		}
-		System.out.println("a");
-		if (customerID == -1) {
+		if (customerIndex == -1) {
 			System.out.println("Request is rejected because customerID is invalid");
 			return false;
 		}
-		System.out.println("b");
+		System.out.println("customerIndex: " + customerIndex);
 
 		// finding the vehicle
 		int vehicleIndex = -1;
@@ -83,7 +83,7 @@ public class Company {
 			System.out.println("Request is rejected because service type is invalid");
 			return false;
 		}
-		System.out.println("c");
+		System.out.println("vehicleIndex: " + vehicleIndex);
 
 		if (vehicleIndex == -1) {
 			System.out.println("Request is rejected because there are no available vehicles");
@@ -106,7 +106,6 @@ public class Company {
 				}
 			}
 		}
-		System.out.println("d");
 
 		
 		// finding the employee
@@ -118,7 +117,8 @@ public class Company {
 				employeeIndex = i;
 			}
 		}
-		System.out.println("e");
+		System.out.println("employeeIndex: " + employeeIndex);
+		System.out.println("serviceArea: " + serviceArea + ", distance: " + distance);
 		
 		System.out.println("Employee name:" + this.serviceEmployeeList.get(employeeIndex).getName());
 		
@@ -146,14 +146,14 @@ public class Company {
 		return averagePayment;
 	}
 	
-	public static Comparable getMin(ArrayList<Comparable> list) {
+	public static Comparable getMin(ArrayList<? extends Comparable> list) {
 	    if (list.isEmpty()) {
 	        throw new IllegalArgumentException("List is empty.");
 	    }
 
 	    Comparable min = list.get(0);
 	    for (int i = 1; i < list.size(); i++) {
-	    	Comparable current = list.get(i);
+	        Comparable current = list.get(i);
 	        if (current.compareTo(min) < 0) {
 	            min = current;
 	        }
@@ -161,6 +161,7 @@ public class Company {
 
 	    return min;
 	}
+
 
 
 	public static int upgrades(ArrayList<Upgrades> list) {

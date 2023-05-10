@@ -82,6 +82,19 @@ public class ServiceEmployee {
 		this.callsMadeInLatestUpgrade = calls;
 	}
 	
+	public int compareTo(ServiceEmployee other) {
+		if (this.getBonus() > other.getBonus()) {
+			return 1;
+		}
+		else if (other.getBonus() > this.getBonus()) {
+			return -1;
+		} 
+		else {
+			return 0;
+		}
+	}
+	
+	
 	public boolean upgrade() {
 		if (this.callsMade >= this.callsMadeInLatestUpgrade * 2) {
 			if (this.bonus*2 > 16) {
