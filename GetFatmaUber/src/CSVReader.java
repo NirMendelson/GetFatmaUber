@@ -29,10 +29,7 @@ public class CSVReader {
             String line;
             int lineNumber = 0; // add a line number counter
             while ((line = inFile.readLine()) != null) {
-                if (lineNumber == 1) { // if it's the first row, skip it
-                    lineNumber++;
-                    continue;
-                }
+
                 customerData = line.split("'");
                 int customerID = Integer.parseInt(customerData[1]);
                 String name = customerData[3];
@@ -53,10 +50,7 @@ public class CSVReader {
 
             lineNumber = 0;
             while ((line = inFile.readLine()) != null) {
-                if (lineNumber == 1) { // if it's the first row, skip it
-                    lineNumber++;
-                    continue;
-                }
+
                 serviceData = line.split("'");
                 int serviceCustomerID = Integer.parseInt(serviceData[1]);
                 String serviceType = serviceData[3];

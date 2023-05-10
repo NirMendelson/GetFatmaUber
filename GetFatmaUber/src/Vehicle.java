@@ -7,6 +7,7 @@ public class Vehicle implements Comparable <Vehicle>  {
 	private int licenseNumber;
 	private String model;
 	private int year;
+	public double baseFare;
 	
 	// לבדוק אם אפשר לכתוב בצורה יותר חכמה
 	public Vehicle(int licenseNumber, String model, int year) {
@@ -22,7 +23,7 @@ public class Vehicle implements Comparable <Vehicle>  {
 		
 	}
 	
-	public double calculateDrivingTime() {
+	public double calculateDrivingTime(double distance) {
 		return 0;
 	}
 	
@@ -79,6 +80,10 @@ public class Vehicle implements Comparable <Vehicle>  {
 		else {
 			return 0;
 		}
+	}
+	
+	public double getFare() {
+		return 0;
 	}
 
 //	public boolean canDeliver() {

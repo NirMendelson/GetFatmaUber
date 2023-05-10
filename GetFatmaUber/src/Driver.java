@@ -8,7 +8,6 @@ public class Driver implements Comparable <Driver> {
 	private double rating;
 	private String [] licenses;
 	private double allEarnings = 0;
-	private boolean isAvailable;
 	private int numOfRatings;
 	
 	public Driver(int ID, String name, String phoneNumber, double rating, String [] licenses) {
@@ -31,14 +30,7 @@ public class Driver implements Comparable <Driver> {
 	public void addToAllEarnings(double profit) {
 		this.allEarnings += profit;
 	}
-	
-	public boolean getIsAvailable() {
-		return this.isAvailable;
-	}
-	
-	public void setIsAvailable(boolean isAvailable) {
-		this.isAvailable = isAvailable;
-	}
+
 	
 	public double getRating() {
 		return this.rating;

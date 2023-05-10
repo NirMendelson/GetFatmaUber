@@ -18,6 +18,10 @@ public class PremiumTaxi extends Taxi implements Upgrades {
         }
         this.maxPassengers = maxPassengers;
     }
+	
+	public double getLuxuryCharge() {
+		return this.luxuryCharge;
+	}
 
 	public boolean upgrade() {
 		Random random = new Random();

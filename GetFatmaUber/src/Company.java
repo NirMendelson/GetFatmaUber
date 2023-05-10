@@ -53,9 +53,8 @@ public class Company {
 		int vehicleIndex = -1;
 		if (serviceType.equals("Delivery")) {
 			for (int i = 0; i < vehiclesList.size(); i++) {
-				if (vehiclesList.get(i).getType().equals("Motorcycle") &&  vehiclesList.get(i).getIsAvailable() == false|| vehiclesList.get(i).getType().equals("Taxi") && vehiclesList.get(i).getIsAvailable() == false) {
+				if (vehiclesList.get(i).getType().equals("Motorcycle")|| vehiclesList.get(i).getType().equals("Taxi")) {
 					vehicleIndex = i;
-					vehiclesList.get(i).setIsAvailable(false);
 					break;
 				}
 			}
@@ -65,7 +64,6 @@ public class Company {
 			for (int i = 0; i < vehiclesList.size(); i++) {
 				if (vehiclesList.get(i).getType().equals("Taxi")) {
 					vehicleIndex = i;
-					vehiclesList.get(i).setIsAvailable(false);
 					break;
 				}
 			}
@@ -74,7 +72,6 @@ public class Company {
 			for (int i = 0; i < vehiclesList.size(); i++) {
 				if (vehiclesList.get(i).getType().equals("Premium Taxi")) {
 					vehicleIndex = i;
-					vehiclesList.get(i).setIsAvailable(false);
 					break;
 				}
 			}
@@ -90,11 +87,13 @@ public class Company {
 		}
 		
 		// finding the driver
+		int driverIndex = -1;
 		if (this.vehiclesList.get(vehicleIndex).getType().equals("Motorcycle")) {
 			for (int i = 0; i < this.driversList.size(); i++) {
 				if (Arrays.asList(this.driversList.get(i).getLicense()).contains("A")) {
 					this.vehiclesList.get(vehicleIndex).setDriver(this.driversList.get(i));
-					this.driversList.get(i).setIsAvailable(false);
+					driverIndex = i;
+					break;
 				}
 			}
 		}
@@ -102,29 +101,38 @@ public class Company {
 			for (int i = 0; i < this.driversList.size(); i++) {
 				if (Arrays.asList(this.driversList.get(i).getLicense()).contains("B")) {
 					this.vehiclesList.get(vehicleIndex).setDriver(this.driversList.get(i));
-					this.driversList.get(i).setIsAvailable(false);
+					driverIndex = i;
+					break;
 				}
 			}
 		}
 
 		
 		// finding the employee
-		double minBonus = this.serviceEmployeeList.get(0).getBonus();
-		int employeeIndex = 0;
-		for (int i = 1; i < this.serviceEmployeeList.size(); i++) {
-			if (this.serviceEmployeeList.get(i).getBonus() < minBonus) {
-				minBonus = this.serviceEmployeeList.get(i).getBonus();
-				employeeIndex = i;
+		ArrayList <ServiceEmployee> tempEmployeeList = new ArrayList<>();
+		for (int i = 0; i < this.serviceEmployeeList.size(); i++) {
+			if (serviceArea.equals(this.serviceEmployeeList.get(i).getServiceArea())) {
+				tempEmployeeList.add(this.serviceEmployeeList.get(i));
 			}
 		}
-		System.out.println("employeeIndex: " + employeeIndex);
-		System.out.println("serviceArea: " + serviceArea + ", distance: " + distance);
+ 		System.out.println("serviceArea: " + serviceArea + ", distance: " + distance);
 		
-		System.out.println("Employee name:" + this.serviceEmployeeList.get(employeeIndex).getName());
+		System.out.println("Employee name:" + getMin(tempEmployeeList).getName());
 		
-		ServiceCall newServiceCall = new ServiceCall(this.customersList.get(customerIndex), this.vehiclesList.get(vehicleIndex), serviceArea, distance);
-		this.serviceEmployeeList.get(employeeIndex).Service(newServiceCall);
+		// storing the driver and the vehicle
+		Driver chosenDriver = this.driversList.get(driverIndex);
+		Vehicle chosenVehicle = this.vehiclesList.get(vehicleIndex);
 		
+		// removing the vehicle and the driver from the list
+		this.driversList.remove(driverIndex);
+		this.vehiclesList.remove(vehicleIndex);
+		
+		ServiceCall newServiceCall = new ServiceCall(this.customersList.get(customerIndex), chosenVehicle, serviceArea, distance);
+		getMin(tempEmployeeList).Service(newServiceCall);
+		
+		// adding the vehicle and the driver to the list
+		this.driversList.add(0, chosenDriver);
+		this.vehiclesList.add(0, chosenVehicle);
 		
 		System.out.println("finished service for customer");
 		return true;
@@ -146,21 +154,17 @@ public class Company {
 		return averagePayment;
 	}
 	
-	public static Comparable getMin(ArrayList<? extends Comparable> list) {
-	    if (list.isEmpty()) {
-	        throw new IllegalArgumentException("List is empty.");
-	    }
+	public static <T extends Comparable<T>> T getMin(ArrayList<T> list) {
+        if (list.isEmpty()) {
+            throw new IllegalArgumentException("List cannot be empty");
+        }
 
-	    Comparable min = list.get(0);
-	    for (int i = 1; i < list.size(); i++) {
-	        Comparable current = list.get(i);
-	        if (current.compareTo(min) < 0) {
-	            min = current;
-	        }
-	    }
+        // Sort the list using natural ordering (based on compareTo method)
+        Collections.sort(list);
 
-	    return min;
-	}
+        // Return the minimum value (first element after sorting)
+        return list.get(0);
+    }
 
 
 

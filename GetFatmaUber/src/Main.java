@@ -129,7 +129,6 @@ public class Main {
 	    company.addSerivceEmployee(employee15);
 
 	    
-	    
 		for (int i = 0; i < customersIDList.size(); i++) {
 			Customer customer = new Customer(customersIDList.get(i), customersNameList.get(i), customersAgeList.get(i), customersGenderList.get(i));
 			company.addCustomer(customer);

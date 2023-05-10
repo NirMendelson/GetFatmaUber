@@ -2,7 +2,6 @@ import java.util.Random;
 
 public class Taxi extends Vehicle implements Deliverable {
 	
-	private double baseFare;
 	protected int maxPassengers;
 	
 	public Taxi(int licenseNumber, String model, int year, double baseFare, int maxPassengers) {
@@ -29,6 +28,10 @@ public class Taxi extends Vehicle implements Deliverable {
 	@Override
 	public boolean canDeliver() {
 		return true;
+	}
+	
+	public double getFare() {
+		return this.baseFare;
 	}
 	
 }
