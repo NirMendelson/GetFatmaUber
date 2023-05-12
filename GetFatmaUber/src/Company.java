@@ -143,7 +143,7 @@ public class Company {
 //			}
 //			else {
 //				deliverableList.add((Deliverable) this.vehiclesList.get(i));
-//			}
+//			}a
 //		}
 //		this.DeliveryVehicles(deliverableList);
 
