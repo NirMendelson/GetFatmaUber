@@ -20,7 +20,12 @@ public class Taxi extends Vehicle implements Deliverable {
 	
 	public double calculateDrivingTime(double distance) {
 	    Random random = new Random();
-	    double P = 0.5 + (0.2 * random.nextDouble());
+	    double min = 0.5;
+        double max = 0.7;
+        int decimalPlaces = 3;
+        double range = max - min;
+        double scaledValue = random.nextDouble() * range + min;
+        double P = Math.round(scaledValue * Math.pow(10, decimalPlaces)) / Math.pow(10, decimalPlaces);
 		return (distance / (100 * P)) + 2;
 	    
 	}
@@ -30,6 +35,7 @@ public class Taxi extends Vehicle implements Deliverable {
 		return true;
 	}
 	
+	@Override
 	public double getFare() {
 		return this.baseFare;
 	}

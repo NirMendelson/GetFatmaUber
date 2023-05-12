@@ -1,5 +1,5 @@
 
-public class ServiceEmployee implements Comparable <ServiceEmployee>{
+public class ServiceEmployee implements Comparable <ServiceEmployee>, Upgradable{
 
 	private int ID;
 	private String name;
@@ -10,6 +10,7 @@ public class ServiceEmployee implements Comparable <ServiceEmployee>{
 	private double bonus;
 	private int callsMade;
 	private int callsMadeInLatestUpgrade;
+	private int numOfRatings;
 
 	public ServiceEmployee (int ID, String Name, double rating, int age, char gender, String
 			serviceArea) {
@@ -46,13 +47,17 @@ public class ServiceEmployee implements Comparable <ServiceEmployee>{
 		sc.getVehicle().getDriver().addToAllEarnings(sc.getCustomer().getLatestExpense());
 
 		// updating the employee's rating
-		this.setRating(sc.getCustomer().getGiveRating());
+		sc.getCustomer().giveRating();
+		this.setRating(sc.getCustomer().getRatingToDriver());
+		System.out.println("rating customer gave: " + sc.getCustomer().getRatingToDriver());
+		System.out.println("Employee rating: " + this.getRating());
 
 		// updating the driver's rating
-		sc.getVehicle().getDriver().setRating(sc.getCustomer().getGiveRating());
+		sc.getVehicle().getDriver().setRating(sc.getCustomer().getRatingToDriver());
+		System.out.println("Drivers rating: " + sc.getVehicle().getDriver().getRating());
 
 		// updating the employee's bonus
-		this.setBonus(sc.getCustomer().getGiveRating() * 2);
+		this.setBonus(sc.getCustomer().getRatingToDriver() * 2);
 		
 		System.out.println("driver Earnings: " + sc.getVehicle().getDriver().getAllEarnings());
 
@@ -71,7 +76,12 @@ public class ServiceEmployee implements Comparable <ServiceEmployee>{
 	}
 
 	public void setRating(double rating) {
-		this.rating = rating;
+		this.numOfRatings++;
+		this.rating = (this.rating + rating)/this.numOfRatings ;
+	}
+	
+	public double getRating() {
+		return this.rating;
 	}
 
 	public String getName() {

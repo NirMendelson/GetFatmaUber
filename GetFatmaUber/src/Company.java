@@ -68,9 +68,9 @@ public class Company {
 				}
 			}
 		}
-		else if (serviceType.equals("Premium Taxi")) {
+		else if (serviceType.equals("PremiumTaxi")) {
 			for (int i = 0; i < vehiclesList.size(); i++) {
-				if (vehiclesList.get(i).getType().equals("Premium Taxi")) {
+				if (vehiclesList.get(i).getType().equals("PremiumTaxi")) {
 					vehicleIndex = i;
 					break;
 				}
@@ -123,16 +123,60 @@ public class Company {
 		Driver chosenDriver = this.driversList.get(driverIndex);
 		Vehicle chosenVehicle = this.vehiclesList.get(vehicleIndex);
 		
+		// checking that the age compartor works
+//		customerAgeComparator ageComparator = new customerAgeComparator();
+//		Customer youngestCustomer = customersList.get(0); // Assuming customersList is your list of customers
+//		for (int i = 1; i < customersList.size(); i++) {
+//		    Customer currentCustomer = customersList.get(i);
+//		    if (ageComparator.compare(currentCustomer, youngestCustomer) < 0) {
+//		        youngestCustomer = currentCustomer;
+//		    }
+//		}
+//		System.out.println("youngest customer: " + youngestCustomer.getID());
+		
+		////////////////////////////////////////////////
+		
+		// checking deliveryVehicles
+//		ArrayList <Deliverable> deliverableList = new ArrayList<>();
+//		for (int i = 0; i < this.vehiclesList.size(); i++) {
+//			if (this.vehiclesList.get(i).getType().equals("PremiumTaxi")) {
+//			}
+//			else {
+//				deliverableList.add((Deliverable) this.vehiclesList.get(i));
+//			}
+//		}
+//		this.DeliveryVehicles(deliverableList);
+
+
+	
+		
+		// checking upgrades function
+//		ArrayList <Upgradable> upgradableList = new ArrayList<>();
+//		for (int i = 0; i < this.vehiclesList.size(); i++) {
+//			if (this.vehiclesList.get(i).getType().equals("PremiumTaxi")) {
+//				upgradableList.add((Upgradable) this.vehiclesList.get(i));
+//			}
+//		}
+//		for (int i = 0; i < this.serviceEmployeeList.size(); i++) {
+//				upgradableList.add((Upgradable) this.serviceEmployeeList.get(i));
+//		}
+//		
+//		System.out.println("num of upgrades objects: " + this.upgrades(upgradableList));
+		
+		////////////////////////////////////////////////
+		
 		// removing the vehicle and the driver from the list
 		this.driversList.remove(driverIndex);
 		this.vehiclesList.remove(vehicleIndex);
 		
+		
 		ServiceCall newServiceCall = new ServiceCall(this.customersList.get(customerIndex), chosenVehicle, serviceArea, distance);
 		getMin(tempEmployeeList).Service(newServiceCall);
 		
+		
 		// adding the vehicle and the driver to the list
-		this.driversList.add(0, chosenDriver);
-		this.vehiclesList.add(0, chosenVehicle);
+		this.driversList.add(driversList.size(), chosenDriver);
+		this.vehiclesList.add(vehiclesList.size(), chosenVehicle);
 		
 		System.out.println("finished service for customer");
 		return true;
@@ -147,10 +191,12 @@ public class Company {
 	}
 	
 	public static double avgCustomerPayment(ArrayList<Customer> customersList) {
-		double averagePayment = 0;
+		double sumPayment = 0;
+		int numOfCustomers = customersList.size();
 		for (int i = 0; i < customersList.size(); i++) {
-			averagePayment += customersList.get(i).getAllExpenses();
+			sumPayment += customersList.get(i).getAllExpenses();
 		}
+		double averagePayment = sumPayment / numOfCustomers;
 		return averagePayment;
 	}
 	
@@ -165,10 +211,20 @@ public class Company {
         // Return the minimum value (first element after sorting)
         return list.get(0);
     }
+	
+//	public static Comparable getMin(ArrayList<? extends Comparable> list) {
+//		Comparable min = list.get(0);
+//		for (int i = 1; i < list.size(); i++) {
+//			if (min.compareTo(list.get(i)) > 0) {
+//				min = list.get(i);
+//			}
+//		}
+//		return min;
+//	}
 
 
 
-	public static int upgrades(ArrayList<Upgrades> list) {
+	public static int upgrades(ArrayList<Upgradable> list) {
 	    int numOfUpdraded = 0;
 	    for (int i = 0; i < list.size(); i++) {
 	    	if (list.get(i).upgrade()) {

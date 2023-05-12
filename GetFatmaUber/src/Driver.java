@@ -7,8 +7,9 @@ public class Driver implements Comparable <Driver> {
 	private String phoneNumber;
 	private double rating;
 	private String [] licenses;
-	private double allEarnings = 0;
-	private int numOfRatings;
+	private double allEarnings;
+	private int ratingsCount;
+	private double sumOfRating;
 	
 	public Driver(int ID, String name, String phoneNumber, double rating, String [] licenses) {
 		this.ID = ID;
@@ -23,8 +24,8 @@ public class Driver implements Comparable <Driver> {
 		Random random = new Random();
         double P = 0.5 + random.nextDouble() * 0.5;
         // getLatestExpenses is our pay
-        this.allEarnings = this.allEarnings + (c.getLatestExpense() + c.getGiveRating()) - (time*P);
-		return (c.getLatestExpense() + c.getGiveRating()) - (time*P);
+        this.allEarnings = this.allEarnings + (c.getLatestExpense() + c.getRatingToDriver()) - (time*P);
+		return (c.getLatestExpense() + c.getRatingToDriver()) - (time*P);
 	}
 	
 	public void addToAllEarnings(double profit) {
@@ -41,8 +42,10 @@ public class Driver implements Comparable <Driver> {
 	}
 	
 	public void setRating(double rating) {
-		this.numOfRatings++;
-		this.rating = (this.rating + rating)/this.numOfRatings ;
+		this.ratingsCount++;
+		this.sumOfRating += rating;
+		this.rating = (this.sumOfRating/this.ratingsCount) ;
+		
 	}
 	
 	public String[] getLicense() {

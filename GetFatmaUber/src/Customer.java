@@ -20,11 +20,11 @@ public class Customer implements Comparable <Customer>  {
 	public int giveRating() {
 		Random random = new Random();
 		this.ratingToDriver = random.nextInt(5) + 1;
-	    return random.nextInt(5) + 1;
+	    return this.ratingToDriver;
 	}
 	
-	public int getGiveRating() {
-		return this.giveRating();
+	public int getRatingToDriver() {
+		return this.ratingToDriver;
 	}
 	
 	public double pay(double time, double Fare) {
