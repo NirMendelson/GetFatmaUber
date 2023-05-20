@@ -12,25 +12,29 @@ public class ServiceEmployee implements Comparable <ServiceEmployee>, Upgradable
 	private int callsMadeInLatestUpgrade;
 	private int numOfRatings;
 
-	public ServiceEmployee (int ID, String Name, double rating, int age, char gender, String
-			serviceArea) {
+	// Constructs a ServiceEmployee object.
+	// Throws a InvalidGenderException if the gender is not M or F.
 
-		this.ID = ID;
-		this.name = Name;
-		this.rating = rating;
-		this.age = age;
-		this.serviceArea = serviceArea;
-		this.bonus = this.rating*2;
+	public ServiceEmployee(int ID, String Name, double rating, int age, char gender, String serviceArea) {
+	    this.ID = ID;
+	    this.name = Name;
+	    this.rating = rating;
+	    this.age = age;
+	    this.serviceArea = serviceArea;
+	    this.bonus = this.rating * 2;
 
-		if (gender != 'M' && gender != 'F') {
-			throw new RuntimeException("gender is invalid");
-		}
-		else {
-			this.gender = gender;
-		}
+	    if (gender != 'M' && gender != 'F') {
+	        throw new InvalidGenderException("Invalid gender: " + gender);
+	    } else {
+	        this.gender = gender;
+	    }
 	}
 
+	// Performs the service for a given service call, updating relevant information such as calls made, customer payment ect.
 	public void Service(ServiceCall sc) {
+		
+		// update calls made
+		this.callsMade++;
 		
 		// making the customer pay
 		sc.getCustomer().pay(sc.getVehicle().calculateDrivingTime(sc.getDistance()), sc.getVehicle().getFare());
@@ -60,38 +64,49 @@ public class ServiceEmployee implements Comparable <ServiceEmployee>, Upgradable
 		this.setBonus(sc.getCustomer().getRatingToDriver() * 2);
 		
 		System.out.println("driver Earnings: " + sc.getVehicle().getDriver().getAllEarnings());
+		
+		// disconnent between the vehicle and the driver
+		sc.getVehicle().setDriver(null);
 
 	}
 
+	// Getter for bonus
 	public double getBonus() {
 		return this.bonus;
 	}
 
+	// Getter for service area
 	public String getServiceArea() {
 		return this.serviceArea;
 	}
 
+	// Setter for bonus
 	public void setBonus(double bonus) {
 		this.bonus = bonus;
 	}
 
+	// Setter for rating
 	public void setRating(double rating) {
 		this.numOfRatings++;
 		this.rating = (this.rating + rating)/this.numOfRatings ;
 	}
 	
+	// Getter for rating
 	public double getRating() {
 		return this.rating;
 	}
 
+	// Getter for name
 	public String getName() {
 		return this.name;
 	}
 
+	// Setter for calls made in latest upgrade
 	public void setCallsMadeInLatestUpgrade(int calls) {
 		this.callsMadeInLatestUpgrade = calls;
 	}
 
+	// Uses Comparable
 	public int compareTo(ServiceEmployee other) {
 		if (this.getBonus() > other.getBonus()) {
 			return 1;
@@ -104,7 +119,7 @@ public class ServiceEmployee implements Comparable <ServiceEmployee>, Upgradable
 		}
 	}
 
-
+	// Uses Upgradable
 	public boolean upgrade() {
 		if (this.callsMade >= this.callsMadeInLatestUpgrade * 2) {
 			if (this.bonus*2 > 16) {

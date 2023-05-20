@@ -5,17 +5,9 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		ArrayList<ArrayList<?>> allLists = CSVReader.readCSVData("C:\\Users\\nirme\\git\\GetFatmaUber\\GetFatmaUber\\src\\Customers.txt.csv", "C:\\Users\\nirme\\git\\GetFatmaUber\\GetFatmaUber\\src\\Service_Requests.txt.csv");
-		ArrayList<Integer> customersIDList = CSVReader.getCustomersIDList();
-	    ArrayList<String> customersNameList = CSVReader.getCustomersNameList();
-	    ArrayList<Integer> customersAgeList = CSVReader.getCustomersAgeList();
-	    ArrayList<Character> customersGenderList = CSVReader.getCustomersGenderList();
-	    ArrayList<Integer> serviceCustomersIDList = CSVReader.getServiceCustomersIDList();
-	    ArrayList<String> serviceTypeList = CSVReader.getServiceTypeList();
-	    ArrayList<String> serviceAreaList = CSVReader.getServiceAreaList();
-	    ArrayList<Integer> distanceList = CSVReader.getDistanceList();
 	    
 	    Company company = new Company();
+	    
 	    
 	    // DRAFT //
 	 
@@ -136,21 +128,12 @@ public class Main {
 	    company.addSerivceEmployee(employee14);
 	    company.addSerivceEmployee(employee15);
 	    
+	    CustomerCSVReader customerReader = new CustomerCSVReader(company);
+	    ServiceCSVReader serviceReader = new ServiceCSVReader(company);
 
 
-
-	    
-		for (int i = 0; i < customersIDList.size(); i++) {
-			Customer customer = new Customer(customersIDList.get(i), customersNameList.get(i), customersAgeList.get(i), customersGenderList.get(i));
-			company.addCustomer(customer);
-		}
-		
-		
-		for (int i = 0; i < serviceCustomersIDList.size(); i++) {
-			System.out.println(serviceCustomersIDList.get(i) + " " +  serviceTypeList.get(i) + " " + serviceAreaList.get(i) + " " + distanceList.get(i));
-			company.serviceForCustomer(serviceCustomersIDList.get(i), serviceTypeList.get(i), serviceAreaList.get(i), distanceList.get(i));
-		}
-	}
+	  
+}
 }
 
 

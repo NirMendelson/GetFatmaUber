@@ -9,6 +9,7 @@ public class Company {
 	private ArrayList<ServiceEmployee> serviceEmployeeList;
 	private ArrayList<Driver> driversList;
 	
+	// Constructs a Company object
 	public Company() {
 		this.customersList = new ArrayList<Customer>();
 		this.vehiclesList = new ArrayList<Vehicle>();
@@ -16,22 +17,27 @@ public class Company {
 		this.driversList = new ArrayList<Driver>();
 	}
 	
+	// adding customer to the list
 	public void addCustomer(Customer c) {
 		this.customersList.add(c);
 	}
 	
+	// adding vehicle to the list
 	public void addVehicle(Vehicle v) {
 		this.vehiclesList.add(v);
 	}
 	
+	// adding service employee to the list
 	public void addSerivceEmployee(ServiceEmployee se) {
 		this.serviceEmployeeList.add(se);
 	}
 	
+	// adding driver to the list
 	public void addDriver(Driver driver) {
 		this.driversList.add(driver);
 	}
 
+	// choosing customer, driver and vehicle
 	public boolean serviceForCustomer(int customerID, String serviceType, String serviceArea, double distance) {
 		
 		System.out.println("started service for customer");
@@ -123,48 +129,6 @@ public class Company {
 		Driver chosenDriver = this.driversList.get(driverIndex);
 		Vehicle chosenVehicle = this.vehiclesList.get(vehicleIndex);
 		
-		// checking that the age compartor works
-//		customerAgeComparator ageComparator = new customerAgeComparator();
-//		Customer youngestCustomer = customersList.get(0); // Assuming customersList is your list of customers
-//		for (int i = 1; i < customersList.size(); i++) {
-//		    Customer currentCustomer = customersList.get(i);
-//		    if (ageComparator.compare(currentCustomer, youngestCustomer) < 0) {
-//		        youngestCustomer = currentCustomer;
-//		    }
-//		}
-//		System.out.println("youngest customer: " + youngestCustomer.getID());
-		
-		////////////////////////////////////////////////
-		
-		// checking deliveryVehicles
-//		ArrayList <Deliverable> deliverableList = new ArrayList<>();
-//		for (int i = 0; i < this.vehiclesList.size(); i++) {
-//			if (this.vehiclesList.get(i).getType().equals("PremiumTaxi")) {
-//			}
-//			else {
-//				deliverableList.add((Deliverable) this.vehiclesList.get(i));
-//			}
-//		}
-//		this.DeliveryVehicles(deliverableList);
-
-
-	
-		
-		// checking upgrades function
-//		ArrayList <Upgradable> upgradableList = new ArrayList<>();
-//		for (int i = 0; i < this.vehiclesList.size(); i++) {
-//			if (this.vehiclesList.get(i).getType().equals("PremiumTaxi")) {
-//				upgradableList.add((Upgradable) this.vehiclesList.get(i));
-//			}
-//		}
-//		for (int i = 0; i < this.serviceEmployeeList.size(); i++) {
-//				upgradableList.add((Upgradable) this.serviceEmployeeList.get(i));
-//		}
-//		
-//		System.out.println("num of upgrades objects: " + this.upgrades(upgradableList));
-		
-		////////////////////////////////////////////////
-		
 		// removing the vehicle and the driver from the list
 		this.driversList.remove(driverIndex);
 		this.vehiclesList.remove(vehicleIndex);
@@ -182,6 +146,7 @@ public class Company {
 		return true;
 	}
 	
+	// Calculating total revenue and return it
 	public static double totalRevenues(ArrayList<Driver> driversList) {
 		double totalRevenue = 0;
 		for (int i = 0; i < driversList.size(); i++) {
@@ -190,6 +155,7 @@ public class Company {
 		return totalRevenue;
 	}
 	
+	// Calculating average customer payment and return it
 	public static double avgCustomerPayment(ArrayList<Customer> customersList) {
 		double sumPayment = 0;
 		int numOfCustomers = customersList.size();
@@ -200,6 +166,7 @@ public class Company {
 		return averagePayment;
 	}
 	
+	// Uses Comparable to return the minimum value
 	public static <T extends Comparable<T>> T getMin(ArrayList<T> list) {
         if (list.isEmpty()) {
             throw new IllegalArgumentException("List cannot be empty");
@@ -211,19 +178,8 @@ public class Company {
         // Return the minimum value (first element after sorting)
         return list.get(0);
     }
-	
-//	public static Comparable getMin(ArrayList<? extends Comparable> list) {
-//		Comparable min = list.get(0);
-//		for (int i = 1; i < list.size(); i++) {
-//			if (min.compareTo(list.get(i)) > 0) {
-//				min = list.get(i);
-//			}
-//		}
-//		return min;
-//	}
 
-
-
+	// Uses Upgradable and returns how much vehicles were upgraded
 	public static int upgrades(ArrayList<Upgradable> list) {
 	    int numOfUpdraded = 0;
 	    for (int i = 0; i < list.size(); i++) {
@@ -234,7 +190,7 @@ public class Company {
 	    return numOfUpdraded;
 	}
 
-	
+	// Uses Deliverable and returns the details of the deliverable vehicles
 	public static void DeliveryVehicles(ArrayList<Deliverable> list) {
 		System.out.println("Deliverable vehicles:");
 		for (int i = 0; i < list.size(); i++) {
